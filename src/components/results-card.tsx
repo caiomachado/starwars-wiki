@@ -5,7 +5,7 @@ import { Card } from "./card";
 import { NavButton } from "./nav-button";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Movie, Person } from "@/types";
-import { X } from "lucide-react";
+import { IoMdClose } from "react-icons/io";
 import { useTransition } from "react";
 import { SearchResults } from "@/app/page";
 
@@ -56,8 +56,8 @@ export function ResultsCard({ isSearching, searchResults, handleResults }: Props
             <div className="flex items-center justify-between">
                 <h2 className="font-bold text-lg leading-[22px]">Results</h2>
                 {searchResults && searchResults?.results?.length > 0 && (
-                    <button type="button" onClick={handleClearResults} className="group">
-                        <X size={22} className="group-hover:text-[#0ab463] transition" />
+                    <button type="button" onClick={handleClearResults} className="group" data-testid="clear-button">
+                        <IoMdClose size={22} className="group-hover:text-[#0ab463] transition" />
                     </button>
                 )}
             </div>

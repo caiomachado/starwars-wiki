@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Overview
 
-## Getting Started
+This is a 100% responsive Fullstack application using Next.js where you can interact with the Star Wars API (SWAPI) to search for characters or movies and see their details.
 
-First, run the development server:
+## Tech stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+I used Next.js, React, Typescript, Tailwind, Firebase, Jest, React Testing Library, React Icons and Node.js
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Running the project
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To run the development version, run `npm install` to install all the dependencies.
+Then create a `.env.local` file in the root of the project and add the following:
+`NEXT_PUBLIC_BASE_URL=http://localhost:3000`
+`FIREBASE_CONFIG_API_KEY=AIzaSyAmSZde2XjBfsM0LMSB5GXJQ2LCgxojLOw`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Then you should be able to run `npm run dev` to initialize the development version.
 
-## Learn More
+## Hosted version
+You can find the hosted version here: https://starwars-wiki-zeta.vercel.app/
 
-To learn more about Next.js, take a look at the following resources:
+## Desktop
+![Home page](public/screenshots/image.png)
+![Person details page](public/screenshots/image-1.png)
+![Movie details page](public/screenshots/image-2.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Custom Loading Screen.
+![Custom loading screen](public/screenshots/image-6.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Mobile 
+![Mobile home page](public/screenshots/image-3.png)
+![Mobile person details page](public/screenshots/image-4.png)
+![Mobile movie details page](public/screenshots/image-5.png)
