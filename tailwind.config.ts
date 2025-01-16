@@ -8,11 +8,29 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+      keyframes: {
+        grow: {
+          '0%': { width: '0%' },
+          '25%': { width: '10rem' },
+          '50%': { width: '20rem' },
+          '75%': { width: '10rem' },
+          '100%': { width: '0%' },
+        },
+        growMobile: {
+          '0%': { width: '0%' },
+          '25%': { width: '8rem' },
+          '50%': { width: '15rem' },
+          '75%': { width: '8rem' },
+          '100%': { width: '0%' },
+        },
+      },
+      animation: {
+        grow: 'grow 1s linear infinite',
+        growMobile: 'growMobile 1s linear infinite',
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require("@designbycode/tailwindcss-text-stroke"),
+  ],
 } satisfies Config;
