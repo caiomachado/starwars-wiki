@@ -1,17 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
-    const { searchParams } = new URL(req.url);
-    const searchValue = searchParams.get("search");
+export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
 
     try {
-        const response = await fetch(`https://swapi.py4e.com/api/films?search=${searchValue}`, {
+        const response = await fetch(`https://swapi.py4e.com/api/people/${id}`, {
             cache: 'force-cache',
         })
 
         if (!response.ok) {
             return NextResponse.json(
-                { error: `Failed to fetch films with query ${searchValue}` },
+                { error: `Failed to fetch person ${id}` },
                 { status: 500 }
             );
         }
@@ -20,7 +19,7 @@ export async function GET(req: NextRequest) {
 
         return NextResponse.json({ data });
     } catch (err) {
-        console.log(err);
+        console.error(err);
         return NextResponse.json(
             { error: "Unknown server error" },
             { status: 500 }

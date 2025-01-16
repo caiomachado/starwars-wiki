@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Card } from "./card";
 import { useSearchParams } from "next/navigation";
+import { PopularQuery } from "@/types";
 
 export type RadioValue = 'people' | 'films';
 
@@ -15,21 +16,19 @@ type Props = {
 export function SearchCard({ isSearching, handleSearch, initialValue }: Props) {
     const searchParams = useSearchParams();
     const optionValue = searchParams.get('option') || 'people';
+    const [popularQueries, setPopularQueries] = useState<PopularQuery[] | null>(null);
     const [inputValue, setInputValue] = useState(initialValue ?? '');
     const [radioValue, setRadioValue] = useState<RadioValue>(optionValue as RadioValue);
 
-    async function onSearch() {
-        handleSearch(inputValue, radioValue)
-        await fetch('/api/queries', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                query: inputValue
-            })
-        })
-    }
+    useEffect(() => {
+        async function getPopularQueries() {
+            const response = await fetch('/api/v1/popular-queries');
+            const { data } = await response.json();
+            setPopularQueries(data);
+        }
+
+        getPopularQueries();
+    }, [])
 
     return (
         <Card className="w-full h-fit flex flex-col gap-5 lg:max-w-[410px] lg:flex-1">
@@ -54,11 +53,25 @@ export function SearchCard({ isSearching, handleSearch, initialValue }: Props) {
                 onChange={(event) => setInputValue(event.target.value)}
             />
 
+            {popularQueries && (
+                <div className="flex flex-col gap-1">
+                    <h3 className="font-semibold text-[#383838] text-sm leading-[18px]">Popular</h3>
+
+                    <p className="text-xs text-[#383838]">
+                        {popularQueries?.length > 0 && popularQueries?.map((query, index) => {
+                            return (
+                                <Fragment key={`${query}-${index}`} >{index + 1}- {query.query} ({query.searchCount}){' '}</Fragment>
+                            )
+                        })}
+                    </p>
+                </div>
+            )}
+
             <button
                 type="button"
                 className="rounded-[20px] w-full font-bold border text-white leading-[18px] text-sm py-2 px-4 bg-[#0ab463] border-[#0ab463] md:w-[260px] lg:w-full disabled:bg-[#c4c4c4] disabled:border-[#c4c4c4] disabled:hover:shadow-none hover:shadow-md transition"
                 disabled={!inputValue}
-                onClick={onSearch}
+                onClick={() => handleSearch(inputValue, radioValue)}
             >
                 {isSearching ? 'SEARCHING...' : 'SEARCH'}
             </button>

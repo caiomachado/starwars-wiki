@@ -12,7 +12,7 @@ export default async function PersonDetailsPage({ params, searchParams }: Props)
     const { id } = await params;
 
     const { search, name, option } = await searchParams;
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/people/${id}`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/people/${id}`);
     const { data: person }: { data: Person } = await response.json();
 
     if (!person.name) return (

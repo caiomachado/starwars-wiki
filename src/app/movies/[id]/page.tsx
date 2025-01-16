@@ -11,7 +11,7 @@ type Props = {
 export default async function MovieDetailsPage({ params, searchParams }: Props) {
     const { id } = await params;
     const { search, name, option } = await searchParams;
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/films/${id}`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/films/${id}`);
     const { data: movie }: { data: Movie } = await response.json();
 
     if (!movie.title) return (

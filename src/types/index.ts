@@ -33,3 +33,8 @@ export interface Movie {
     created: string;
     edited: string;
 }
+
+export interface PopularQuery {
+    query: string;
+    searchCount: number;
+}

@@ -33,6 +33,14 @@ describe("Home", () => {
     })
 
     it("renders properly with empty results", () => {
+        global.fetch = jest.fn().mockImplementation(() =>
+            new Promise((resolve) => {
+                resolve({
+                    json: jest.fn().mockResolvedValue({ data: [] }),
+                });
+            })
+        );
+
         render(<RootPage />);
 
         const heading = screen.getByText('What are you searching for?');
@@ -49,6 +57,14 @@ describe("Home", () => {
     });
 
     it("renders input with default value if search query is present", () => {
+        global.fetch = jest.fn().mockImplementation(() =>
+            new Promise((resolve) => {
+                resolve({
+                    json: jest.fn().mockResolvedValue({ data: [] }),
+                });
+            })
+        );
+
         mockGetSearchParams.mockReturnValue(() => 'luke');
         render(<RootPage />);
 
@@ -57,6 +73,14 @@ describe("Home", () => {
     })
 
     it("changes input placeholder based on category selection", async () => {
+        global.fetch = jest.fn().mockImplementation(() =>
+            new Promise((resolve) => {
+                resolve({
+                    json: jest.fn().mockResolvedValue({ data: [] }),
+                });
+            })
+        );
+
         render(<RootPage />);
 
         const [peopleButton, moviesButton] = screen.getAllByRole('radio');
@@ -70,6 +94,14 @@ describe("Home", () => {
     })
 
     it("should have disabled search button if input has no value", () => {
+        global.fetch = jest.fn().mockImplementation(() =>
+            new Promise((resolve) => {
+                resolve({
+                    json: jest.fn().mockResolvedValue({ data: [] }),
+                });
+            })
+        );
+
         render(<RootPage />);
 
         const searchInput = screen.getByRole('textbox');
@@ -79,6 +111,16 @@ describe("Home", () => {
     })
 
     it("should enable search button if input has value", async () => {
+        global.fetch = jest.fn().mockImplementation(() =>
+            new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve({
+                        json: jest.fn().mockResolvedValue({ data: [] }),
+                    });
+                }, 100);
+            })
+        );
+
         render(<RootPage />);
 
         const searchInput = screen.getByRole('textbox');

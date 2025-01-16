@@ -31,7 +31,7 @@ export default function Home() {
     params.set('option', validatedRadioValue);
 
     startSearchTransition(async () => {
-      const response = await fetch(`/api/${radioValue}?search=${filterValue}`);
+      const response = await fetch(`/api/v1/${radioValue}?search=${filterValue}`);
       const { data } = await response.json();
       setSearchResults(data);
       router.push(`?${params.toString()}`)

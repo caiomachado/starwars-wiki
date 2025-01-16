@@ -19,7 +19,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
 
         return NextResponse.json({ data });
     } catch (err) {
-        console.log(err);
+        console.error(err);
         return NextResponse.json(
             { error: "Unknown server error" },
             { status: 500 }
