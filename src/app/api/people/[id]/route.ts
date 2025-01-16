@@ -1,11 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-interface UserRouteParams {
-    id: string;
-}
-
-export async function GET(req: NextRequest, { params }: { params: UserRouteParams }) {
-    const { id } = params;
+export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
 
     try {
         const response = await fetch(`https://swapi.py4e.com/api/people/${id}`, {
