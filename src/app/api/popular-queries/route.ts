@@ -16,7 +16,7 @@ export async function GET() {
 
         const sortedArrayBySearchCount = docsData.toSorted((current, next) => {
             return next.searchCount - current.searchCount;
-        }).slice(0, 5);
+        });
 
         return NextResponse.json({ data: sortedArrayBySearchCount });
     } catch (err) {
@@ -35,24 +35,35 @@ export async function POST() {
 
         const docsData = documents.docs.map((doc) => doc.data());
 
-        const currentPopularQueries = docsData.reduce((acc, cur) => {
+        const mappedQueriesObject = Object.entries(docsData.reduce((acc, cur) => {
             if (!acc[cur.query]) {
                 acc[cur.query] = [cur];
             } else {
                 acc[cur.query].push(cur);
             }
             return acc;
-        }, {})
+        }, {})).map(([query, items]) => ({ query, searchCount: items.length }));
 
-        const topSearchesRef = collection(db, 'topSearches');
+        const sortedArrayBySearchCount = mappedQueriesObject.toSorted((current, next) => {
+            return next.searchCount - current.searchCount;
+        }).slice(0, 5);
+
+        const topSearchesRef = collection(db, "topSearches");
+        const existingDocuments = await getDocs(topSearchesRef);
+        const existingIds = existingDocuments.docs.map((doc) => doc.id);
+        const newTop5 = sortedArrayBySearchCount.map((newTopQuery) => newTopQuery.query);
         const batch = writeBatch(db);
 
-        Object.entries(currentPopularQueries).forEach(([query, items]) => {
-            const itemDocRef = doc(topSearchesRef, query);
+        existingIds.forEach((id) => {
+            if (!newTop5.includes(id)) {
+                const docRef = doc(topSearchesRef, id);
+                batch.delete(docRef);
+            }
+        })
 
-            batch.set(itemDocRef, {
-                searchCount: items.length,
-            });
+        sortedArrayBySearchCount.forEach(({ query, searchCount }) => {
+            const itemDocRef = doc(topSearchesRef, query);
+            batch.set(itemDocRef, { searchCount });
         });
 
         await batch.commit();

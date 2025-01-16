@@ -2,7 +2,6 @@ import { Person } from "@/types";
 import Link from "next/link";
 import { BackButton } from "@/components/back-button";
 import { Fragment } from "react";
-import { } from 'next/navigation'
 
 type Props = {
     params: Promise<{ id: string }>;

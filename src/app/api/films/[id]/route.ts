@@ -18,7 +18,6 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
         const data = await response.json();
 
         return NextResponse.json({ data });
-
     } catch (err) {
         console.log(err);
         return NextResponse.json(
