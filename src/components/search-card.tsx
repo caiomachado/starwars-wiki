@@ -71,7 +71,11 @@ export function SearchCard({ isSearching, handleSearch, initialValue }: Props) {
                 type="button"
                 className="rounded-[20px] w-full font-bold border text-white leading-[18px] text-sm py-2 px-4 bg-[#0ab463] border-[#0ab463] md:w-[260px] lg:w-full disabled:bg-[#c4c4c4] disabled:border-[#c4c4c4] disabled:hover:shadow-none hover:shadow-md transition"
                 disabled={!inputValue}
-                onClick={() => handleSearch(inputValue, radioValue)}
+                onClick={() => {
+                    if (!isSearching) {
+                        handleSearch(inputValue, radioValue)
+                    }
+                }}
             >
                 {isSearching ? 'SEARCHING...' : 'SEARCH'}
             </button>
