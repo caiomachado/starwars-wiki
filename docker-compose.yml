@@ -1,0 +1,13 @@
+# docker-compose.yml
+services:
+  app:
+    build: .
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
+      - FIREBASE_CONFIG_API_KEY=${FIREBASE_CONFIG_API_KEY}
+    env_file:
+      - .env
+    restart: unless-stopped

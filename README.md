@@ -8,15 +8,28 @@ I used Next.js, React, Typescript, Tailwind, Firebase, Jest, React Testing Libra
 
 ## Running the project
 
+Obs: To run it locally, you will need to create your own firebase store and replace all the config inside `firebase.ts` with your own credentials.
+
 To run the development version, run `npm install` to install all the dependencies.
 Then create a `.env.local` file in the root of the project and add the following:
 `NEXT_PUBLIC_BASE_URL=http://localhost:3000`
-`FIREBASE_CONFIG_API_KEY=AIzaSyAmSZde2XjBfsM0LMSB5GXJQ2LCgxojLOw`
+`FIREBASE_CONFIG_API_KEY=YOUR FIREBASE API KEY GOES IN HERE`
 
 Then you should be able to run `npm run dev` to initialize the development version.
 
-## Hosted version
-You can find the hosted version here: https://starwars-wiki-zeta.vercel.app/
+## Running using Docker
+You need to install Docker in your machine if you haven't already.
+Once you do, make sure to create the `.env` file with the following:
+`NEXT_PUBLIC_BASE_URL=http://localhost:3000`
+`FIREBASE_CONFIG_API_KEY=YOUR FIREBASE API KEY GOES IN HERE`
+
+Obs: Before you run docker compose, make sure you create your own firebase store and replace all the config inside `firebase.ts` with your own credentials.
+
+After creating the `.env` file, you should be able to run `docker compose up -d`
+Once it finishes building, open `http://localhost:3000` and you should be able to use the application
+
+## Vercel hosted version
+You can find the vercel hosted version here: https://starwars-wiki-zeta.vercel.app/
 
 ## Desktop
 ![Home page](public/screenshots/image.png)

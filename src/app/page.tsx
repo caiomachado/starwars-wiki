@@ -43,10 +43,10 @@ export default function Home() {
     const search = searchParams.get('search');
     const option = searchParams.get('option') as RadioValue;
 
-    if (search && option) {
+    if (search && option && !searchResults && !isSearching) {
       handleSearch(search, option);
     }
-  }, [handleSearch, searchParams])
+  }, [handleSearch, searchParams, searchResults, isSearching])
 
   return (
     <main className="w-full flex flex-col items-center p-[30px] pt-0 pb-6 gap-[30px] lg:flex-row lg:max-w-5xl lg:mx-auto lg:items-start">
