@@ -6,6 +6,12 @@ This is a 100% responsive Fullstack application using Next.js where you can inte
 
 I used Next.js, React, Typescript, Tailwind, Firebase, Jest, React Testing Library, React Icons and Node.js
 
+## Node version
+This project requires at least version 20 of Node to be able to run all the features without any problems.
+You can easily download the 20 or higher version using nvm:
+Run in your terminal `nvm install v20`, then you need to run `nvm use 20`
+After running this and selecting the version 20, you should proceed to the next step.
+
 ## Running the project
 
 Obs: To run it locally, you will need to create your own firebase store and replace all the config inside `firebase.ts` with your own credentials.
